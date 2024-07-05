@@ -1,0 +1,80 @@
+version: '3.7'
+
+services:
+  traefik:
+    image: traefik:v2.4
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - web
+
+  frontend:
+    build: ./frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`seyramgabriel.com`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+    networks:
+      - web
+
+  backend:
+    build: ./backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`seyramgabriel.com`) && PathPrefix(`/api`, `/docs`)"
+      - "traefik.http.services.backend.loadbalancer.server.port=8000"
+    environment:
+      - DATABASE_URL=postgresql://seyramgabriel:seysey48@postgres/hadaridb
+    networks:
+      - web
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: seyramgabriel
+      POSTGRES_PASSWORD: seysey48
+      POSTGRES_DB: hadaridb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - web
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    networks:
+      - web
+
+  proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    ports:
+      - 8090:80
+      - 8443:443
+    environment:
+      DB_MYSQL_HOST: db
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: npm
+      DB_MYSQL_PASSWORD: npm
+      DB_MYSQL_NAME: npm
+    networks:
+      - web
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+
+volumes:
+  postgres_data:
+
+networks:
+  web:
+    external: true
