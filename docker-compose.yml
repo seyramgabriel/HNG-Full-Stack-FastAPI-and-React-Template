@@ -31,7 +31,7 @@ services:
       - "traefik.http.routers.backend.rule=Host(`seyramgabriel.com`) && PathPrefix(`/api`, `/docs`)"
       - "traefik.http.services.backend.loadbalancer.server.port=8000"
     environment:
-      - DATABASE_URL=postgresql://seyramgabriel:seysey48@postgres/hadaridb
+      - DATABASE_URL=postgresql://seyramgabriel:@postgres/hadaridb
     networks:
       - web
 
@@ -39,7 +39,7 @@ services:
     image: postgres:13
     environment:
       POSTGRES_USER: seyramgabriel
-      POSTGRES_PASSWORD: seysey48
+      POSTGRES_PASSWORD: 
       POSTGRES_DB: hadaridb
     volumes:
       - postgres_data:/var/lib/postgresql/data
