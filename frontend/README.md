@@ -33,7 +33,7 @@ This directory contains the frontend of the application built with ReactJS and C
     Make sure you have [Frontend Dockerfile] in the frontend directory. 
 
 2. **nginx.conf**:
-    Make sure you have [Frontend nginx.conf](./frontend/nginx.conf) in the frontend directory. 
+    Make sure you have [Frontend](./frontend/nginx.conf) in the frontend directory. 
 
 
 3. **Next steps**:
