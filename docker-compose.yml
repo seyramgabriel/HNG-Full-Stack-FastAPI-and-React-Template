@@ -1,50 +1,43 @@
-version: '3.7'
+version: '3.7'       
 
 services:
-  traefik:
-    image: traefik:v2.4
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--entrypoints.web.address=:80"
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - web
-
   frontend:
     build: ./frontend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`seyramgabriel.com`)"
-      - "traefik.http.services.frontend.loadbalancer.server.port=80"
-    networks:
+    networks:        
       - web
 
   backend:
     build: ./backend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`seyramgabriel.com`) && PathPrefix(`/api`, `/docs`)"
-      - "traefik.http.services.backend.loadbalancer.server.port=8000"
     environment:
-      - DATABASE_URL=postgresql://seyramgabriel:seysey48@postgres/hadaridb
+      - DATABASE_URL=postgresql://app:changethis123@postgres/app
     networks:
       - web
+    depends_on:
+      - postgres
+    command: >
+      sh -c "
+      until pg_isready -h postgres -p 5432; do
+        echo 'Waiting for PostgreSQL to be ready...';
+        sleep 2;
+      done;
+      poetry run bash ./prestart.sh && poetry run uvicorn app.main:app --reload
+      "
 
   postgres:
     image: postgres:13
     environment:
-      POSTGRES_USER: seyramgabriel
-      POSTGRES_PASSWORD: seysey48
-      POSTGRES_DB: hadaridb
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: changethis123
+      POSTGRES_DB: app
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - web
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   adminer:
     image: adminer
@@ -58,8 +51,9 @@ services:
   proxy-manager:
     image: jc21/nginx-proxy-manager:latest
     ports:
-      - 8090:80
-      - 8443:443
+      - 80:80
+      - 443:443
+      - 8090:81  # For accessing NPM UI
     environment:
       DB_MYSQL_HOST: db
       DB_MYSQL_PORT: 3306
@@ -72,9 +66,19 @@ services:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
 
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - web
+    depends_on:
+      - frontend
+      - backend
+
 volumes:
   postgres_data:
 
 networks:
   web:
-    external: true
+    driver: bridge
