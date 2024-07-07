@@ -35,6 +35,8 @@ Add Poetry to your PATH (if not automatically added):
     poetry run bash ./prestart.sh
     ```
 
+    Make sure to set up a postgres database with the details in the .env file. Postgres must be running before you run this command.
+
 4. **Run the backend server**:
     ```sh
     poetry run uvicorn app.main:app --reload
@@ -42,3 +44,20 @@ Add Poetry to your PATH (if not automatically added):
 
 5. **Update configuration**:
    Ensure you update the necessary configurations in the `.env` file, particularly the database configuration.
+   - Update BACKEND_CORS_ORIGINS from 'localhost' to the IP address if you are using a Virtual Machine.
+   - Update Postgress database name, password, and user to your choice, but the server must remain localhost if it is to run on same machine as both your frontend and backend.
+
+
+## Containerisation
+
+1.  **Dockerfile**
+
+    Make sure you have [Backend Dockerfile](./backend/Dockerfile) in the backend directory. 
+
+2. **root directory**:
+    - cd back to the directory that contains both frontend and backend.
+    - Create a docker-compose.yml file as in [devops-stage-2 docker-compose.yml](./devops-stage-2/docker-compose.yml)
+    - Run the following command to build the docker image:
+     ```
+     docker-compose up -d
+     ```
