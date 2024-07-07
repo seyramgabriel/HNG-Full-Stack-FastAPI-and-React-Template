@@ -30,15 +30,15 @@ This directory contains the frontend of the application built with ReactJS and C
 ## Containerisation:
 
 1. **Dockerfile**:
-    Make sure you have [Frontend Dockerfile] in the frontend directory. 
+    Make sure you have [frontend Dockerfile] in the frontend directory. 
 
 2. **nginx.conf**:
-    Make sure you have [Frontend](./frontend/nginx.conf) in the frontend directory. 
+    Make sure you have [frontend](./frontend/nginx.conf) in the frontend directory. 
 
 
 3. **Next steps**:
 
-    Proceed to [Backend README.md](./backend/README.md) as continuation for containerisation. 
+    Proceed to [backend README.md](./backend/README.md) as continuation for containerisation. 
 
 
 
