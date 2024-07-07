@@ -36,9 +36,7 @@ This directory contains the frontend of the application built with ReactJS and C
     Make sure you have nginx.conf properly set up in the frontend directory. 
 
 
-3. **Next steps**:
-
-    Proceed to backend README.md file for continuation of containerisation. 
+3. **Next steps**: Proceed to backend README.md file for continuation of containerisation. 
 
 
 
