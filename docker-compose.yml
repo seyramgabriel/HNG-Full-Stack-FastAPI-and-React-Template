@@ -1,27 +1,6 @@
-version: '3.7'
+version: '3.8'
 
 services:
-  frontend:
-    build: ./frontend
-    networks:
-      - web
-
-  backend:
-    build: ./backend
-    environment:
-      - DATABASE_URL=postgresql://app:changethis123@postgres/app
-    networks:
-      - web
-    depends_on:
-      - postgres
-    command: >
-      sh -c "
-      until pg_isready -h postgres -p 5432; do
-        echo 'Waiting for PostgreSQL to be ready...';
-        sleep 2;
-      done;
-      poetry run bash ./prestart.sh && poetry run uvicorn app.main:app --reload
-      "
 
   postgres:
     image: postgres:13
@@ -31,54 +10,86 @@ services:
       POSTGRES_DB: app
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - web
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U app"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  adminer:
-    image: adminer
     ports:
-      - 8080:8080
-    environment:
-      ADMINER_DEFAULT_SERVER: postgres
-    networks:
-      - web
+      - "5432:5432"
 
-  proxy-manager:
-    image: jc21/nginx-proxy-manager:latest
-    ports:
-      - 80:80
-      - 443:443
-      - 8090:81  # For accessing NPM UI
-    environment:
-      DB_MYSQL_HOST: db
-      DB_MYSQL_PORT: 3306
-      DB_MYSQL_USER: npm
-      DB_MYSQL_PASSWORD: npm
-      DB_MYSQL_NAME: npm
-    networks:
-      - web
+  backend:
+    build: ./backend
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_SERVER=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=app
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=changethis123
+      - BACKEND_CORS_ORIGINS="http://seyramgabriel.chickenkiller.com,http://seyramgabriel.chickenkiller:5173,https://seyramgabriel.chickenkiller,https://seyramgabriel.chickenkiller:5173"
+      - SECRET_KEY=changethis123
+      - FIRST_SUPERUSER=devops@hng.tech
+      - FIRST_SUPERUSER_PASSWORD=devops#HNG11
+      - USERS_OPEN_REGISTRATION=True
+
+  frontend:
+    build: ./frontend
+    command: ["npm", "run", "dev"]
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5173:5173"
 
   nginx:
-    image: nginx:latest
+    build: .
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    networks:
-      - web
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
     depends_on:
       - frontend
       - backend
+      - proxy-manager
+      - adminer
 
+#  nginx:
+#    image: nginx:latest
+#    volumes:
+#      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+#      - ./nginx/ssl:/etc/nginx/ssl
+#    depends_on:
+#      - frontend
+#      - backend
+
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+
+  proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    restart: unless-stopped
+    ports:
+ #     - "81:81"
+      - "8090:8090" # For accessing NPM UI
+ #     - "80:80"
+ #     - "443:443"
+    volumes:
+      - ./proxy/data:/data
+      - ./proxy/letsencrypt:/etc/letsencrypt
+      - ./proxy/ssl:/etc/nginx/ssl
+    depends_on:
+#      - nginx
+      - adminer
 volumes:
   postgres_data:
-
-networks:
-  web:
-    driver: bridge

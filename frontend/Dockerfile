@@ -1,35 +1,29 @@
-# Stage 1: Build the React application
-FROM node:16 as build
+# Use a specific Node.js version for better consistency
+FROM node:20
 
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
+# Copy package.json and package-lock.json (if you have it)
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Install Vite globally (optional, depending on your setup)
+RUN npm install -g vite@^5.0.13
+
+# Copy the rest of the application
 COPY . .
 
-# Build the application
+# Build the Next.js app for production, this will produce "dist", a directory artefact
 RUN npm run build
 
-# Debugging step: List the contents of the build directory
-RUN ls -al /app/dist
+# Expose the port Next.js is expected to run on (usually 3000)
+EXPOSE 5173
 
-# Stage 2: Serve the React application with Nginx
-FROM nginx:latest
+# Set the working directory to the 'dist' folder
+WORKDIR /app/dist
 
-# Copy the built React application from the previous stage
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Copy the Nginx configuration file
-COPY app  /etc/nginx/sites-available/app
-
-# Expose port 80
-EXPOSE 80
-
-# Start Nginx in the foreground
-CMD ["nginx", "-g", "daemon off;"]
-
+# Start the Next.js server
+CMD ["npx", "serve", "-s", "-l", "5173", "-H", "0.0.0.0"]
