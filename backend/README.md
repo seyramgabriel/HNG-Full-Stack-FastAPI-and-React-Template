@@ -60,7 +60,7 @@ Add Poetry to your PATH (if not automatically added):
     - cd back to the directory that contains both frontend and backend.
     - Install inginx
     - Edit the sites-available file in the root directory of this repository to reflect your domain name and IP address
-    - Copy the content to /etc/nginx/sites-available/your-prefered name eg.seyramgabriel
+    - Copy the content of sites-available file to /etc/nginx/sites-available/your-prefered name eg.seyramgabriel
     - Run ```
       sudo ln -s /etc/nginx/sites-available/seyramgabriel /etc/nginx/sites-enabled/
       ```
