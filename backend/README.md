@@ -58,6 +58,16 @@ Add Poetry to your PATH (if not automatically added):
 
 2. **root directory**:
     - cd back to the directory that contains both frontend and backend.
+    - Install inginx
+    - Edit the sites-available file in the root directory of this repository to reflect your domain name and IP address
+    - Copy the content to /etc/nginx/sites-available/your-prefered name eg.seyramgabriel
+    - Run ```
+      sudo ln -s /etc/nginx/sites-available/seyramgabriel /etc/nginx/sites-enabled/
+      ```
+    - Run
+      ```
+      sudo service nginx restart
+      ```
     - Create a docker-compose.yml file as in the root director.
     - Run the following command to build the docker image:
      ```
