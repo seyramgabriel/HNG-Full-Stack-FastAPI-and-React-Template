@@ -70,6 +70,7 @@ Add Poetry to your PATH (if not automatically added):
       sudo service nginx restart
       ```
     - Create a docker-compose.yml file as in the root director.
+3. **Building and running docker images**
     - Run the following command to build the docker image:
      ```
      docker-compose up -d
