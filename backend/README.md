@@ -56,12 +56,13 @@ Add Poetry to your PATH (if not automatically added):
 
     Make sure you have the Dockerfile in the backend directory. 
 
-2. **root directory**:
+2. **Setting up ports and proxy**:
     - cd back to the directory that contains both frontend and backend.
     - Install inginx
     - Edit the sites-available file in the root directory of this repository to reflect your domain name and IP address
     - Copy the content of sites-available file to /etc/nginx/sites-available/your-prefered name eg.seyramgabriel
-    - Run ```
+    - Run
+      ```
       sudo ln -s /etc/nginx/sites-available/seyramgabriel /etc/nginx/sites-enabled/
       ```
     - Run
