@@ -231,12 +231,14 @@ volumes:
      ```
 
 4. **Run the following commands to check the images built and the containers created/running**
+
     ```docker images``` # Show images
     ```docker ps -a```  # Containers created
     ```docker ps```     # Containers running
 
 5. **Accessing the application**
  You can now access the application on
+ 
  seyramgabriel.com    # or your domain name
  www.seyramgabriel.com
  db.seyramgabriel.com
