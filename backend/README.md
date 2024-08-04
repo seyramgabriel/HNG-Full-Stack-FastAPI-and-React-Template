@@ -240,19 +240,19 @@ volumes:
 
 5. **Accessing the application**
 
- You can now access the application on
+ You can now access the application on your domain names as below:
  
- seyramgabriel.com    # or your domain name
+ ```seyramgabriel.com```    # Replace with your domain name
 
- www.seyramgabriel.com
+ ```www.seyramgabriel.com```
 
- db.seyramgabriel.com
+ ```db.seyramgabriel.com```
 
- www.seyramgabriel.com
+ ```www.seyramgabriel.com```
 
- proxy.seyramgabriel.com
+ ```proxy.seyramgabriel.com```
 
- www.proxy.seyramgabriel.com
+ ```www.proxy.seyramgabriel.com```
 
 
 6. **SSL Certificates**
@@ -263,7 +263,7 @@ volumes:
  sudo apt install certbot python3-certbot-nginx
  ```
 
- Run to obtain certificates for your domain names and get your nginx configured automatically. Replace domain names with your registered domain names.
+ To obtain certificates for your domain names and get your nginx configured automatically run the following. Replace domain names with your registered domain names.
  ```
  sudo certbot --nginx -d seyramgabriel.com -d www.seyramgabriel.com -d proxy.seyramgabriel.com -d www.proxy.seyramgabriel.com -d db.seyramgabriel.com -d www.db.seyramgabriel.com```
 
