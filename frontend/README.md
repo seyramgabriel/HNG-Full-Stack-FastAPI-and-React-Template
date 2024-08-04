@@ -36,8 +36,30 @@ This directory contains the frontend of the application built with ReactJS and C
 
 1. **Dockerfile**:
     Make sure you have the Dockerfile in the frontend directory.
+
+    Dockerfile
+```
+# Use a specific Node.js version for better consistency
+FROM node:20
+
+# Set working directory
+WORKDIR /app
+
+# Copy everything
+COPY . .
+
+# Install dependencies
+RUN npm install
+
+# Expose the port as in vite.config.ts file
+EXPOSE 5173
+
+# Start the Vite server
+CMD ["npm", "run", "dev"]
+```
+
 2. **Frontend .env**
-   Edit the frontend/.env file to reflect your domain name of IP address
+   Edit the frontend/.env file to reflect your domain name or IP address
 
 3. **Next steps**: Proceed to backend README.md file for continuation of containerisation. 
 

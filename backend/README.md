@@ -55,6 +55,7 @@ Add Poetry to your PATH (if not automatically added):
 
     Make sure you have the Dockerfile in the backend directory. 
 
+  Dockerfile
 ```
 # Use the official Python image with the desired version
 FROM python:3.11-slim
@@ -100,7 +101,7 @@ CMD poetry run bash ./prestart.sh;poetry run uvicorn app.main:app --host 0.0.0.0
     - Install inginx
     - Edit the sites-available file in the root directory of this repository to reflect your domain name and IP address
     - Make sure to use a registered domain name and to have records for all sub-domains
-    - Copy the content of sites-available file to /etc/nginx/sites-available/your-prefered-name eg.seyramgabriel
+    - Copy the content of sites-available file to /etc/nginx/sites-available/your-prefered-name eg. seyramgabriel
 
 
     - Run
@@ -114,6 +115,8 @@ CMD poetry run bash ./prestart.sh;poetry run uvicorn app.main:app --host 0.0.0.0
       ```
 
     - Create a docker-compose.yml file as in the root directory
+
+    docker-compose.yml
 ```
 version: '3.8'
 
@@ -226,3 +229,30 @@ volumes:
      ```
      docker-compose up -d
      ```
+
+4. **Run the following commands to check the images built and the containers created/running**
+    ```docker images``` # Show images
+    ```docker ps -a```  # Containers created
+    ```docker ps```     # Containers running
+
+5. **Accessing the application**
+ You can now access the application on
+ seyramgabriel.com    # or your domain name
+ www.seyramgabriel.com
+ db.seyramgabriel.com
+ www.seyramgabriel.com
+ proxy.seyramgabriel.com
+ www.proxy.seyramgabriel.com
+
+
+6. **SSL Certificates**
+ Run this to install certbot
+ ```
+ sudo apt update
+ sudo apt install certbot python3-certbot-nginx
+ ```
+
+ Run to obtain certificates for your domain names and get your nginx configured automatically. Replace domain names with your registered domain names.
+ ```
+ sudo certbot --nginx -d seyramgabriel.com -d www.seyramgabriel.com -d proxy.seyramgabriel.com -d www.proxy.seyramgabriel.com -d db.seyramgabriel.com -d www.db.seyramgabriel.com```
+
