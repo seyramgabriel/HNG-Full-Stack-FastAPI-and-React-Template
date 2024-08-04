@@ -59,8 +59,8 @@ services:
   #     - proxy-manager
   #     - adminer
 
-  nginx:
-    image: nginx:latest
+  # nginx:
+  #   image: nginx:latest
 #    volumes:
     #  - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     #  - ./nginx/ssl:/etc/nginx/ssl
@@ -71,9 +71,9 @@ services:
   #  ports:
   #    - "80:80"
   #    - "443:443"
-    depends_on:
-      - frontend
-      - backend
+    # depends_on:
+    #   - frontend
+    #   - backend
 
   adminer:
     image: adminer:latest

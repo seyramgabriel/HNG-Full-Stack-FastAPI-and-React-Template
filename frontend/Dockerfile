@@ -4,31 +4,14 @@ FROM node:20
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json (if you have it)
-#COPY  package*.json ./
+# Copy everything
 COPY . .
+
 # Install dependencies
 RUN npm install
 
-# Install Vite globally (optional, depending on your setup)
-#RUN npm install @tanstack/router-vite-plugin
-  # npm install -g vite@^5.0.13
-
-# Copy the rest of the application
-#COPY . .
-
-# Build the Next.js app for production, this will produce "dist", a directory artefact
-RUN npm run build
-
-# Expose the port Next.js is expected to run on (usually 3000)
+# Expose the port as in vite.config.ts file
 EXPOSE 5173
 
-# Set the working directory to the 'dist' folder
-WORKDIR /app/dist
-
-# Start the Next.js server
-CMD ["npx", "serve", "-s", "-l", "5173", "-H", "0.0.0.0"]
-
 # Start the Vite server
-#CMD ["npx", "serve", "-s", ".", "-l", "5173"]
-#CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev"]

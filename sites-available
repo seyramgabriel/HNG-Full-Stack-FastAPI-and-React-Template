@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name seyramgabriel.com;
+    server_name seyramgabriel.com www.seyramgabriel.com;
 
     # Route / to http://localhost:5173
     location / {
@@ -45,7 +45,7 @@ server {
 
 server {
     listen 80;
-    server_name proxy.seyramgabriel.com;
+    server_name proxy.seyramgabriel.com www.proxy.seyramgabriel.com;
 
     location / {
         proxy_pass http://3.131.151.203:8090;
@@ -59,7 +59,7 @@ server {
 
 server {
     listen 80;
-    server_name db.seyramgabriel.com;
+    server_name db.seyramgabriel.com www.db.seyramgabriel.com;
 
     location / {
         proxy_pass http://3.131.151.203:8080;
