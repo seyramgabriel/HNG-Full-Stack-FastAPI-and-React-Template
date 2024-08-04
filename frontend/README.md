@@ -33,6 +33,7 @@ This directory contains the frontend of the application built with ReactJS and C
    Use ```http://IP-address:5173``` if you are running on a virtual machine
 
 ## Containerisation:
+You can run the install.sh script to install docker and nginx 
 
 1. **Dockerfile**:
     Make sure you have the Dockerfile in the frontend directory.
