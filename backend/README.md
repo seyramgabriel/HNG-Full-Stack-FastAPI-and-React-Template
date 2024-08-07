@@ -45,8 +45,8 @@ Add Poetry to your PATH (if not automatically added):
 
 5. **Update configuration**:
    Ensure you update the necessary configurations in the `.env` file, particularly the database configuration.
-   - Update BACKEND_CORS_ORIGINS to reflect your domain name or server IP or localhost, must be consistent with the VITE_API_URL in your frontend .env file
-   - Update Postgress database name, password, and user to your choice, but the server must remain localhost if it isto run on same machine as both your frontend and backend.
+   - Update BACKEND_CORS_ORIGINS to reflect your domain name or server IP or localhost, it must be consistent with the VITE_API_URL in your frontend .env file
+   - Update Postgress database name, password, and user to your choice, but the server must remain localhost if it is to run on same machine as both your frontend and backend.
 
 
 ## Containerisation
