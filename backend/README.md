@@ -265,5 +265,6 @@ volumes:
 
  To obtain certificates for your domain names and get your nginx configured automatically, run the following. Replace domain names with your registered domain names.
  ```
- sudo certbot --nginx -d seyramgabriel.com -d www.seyramgabriel.com -d proxy.seyramgabriel.com -d www.proxy.seyramgabriel.com -d db.seyramgabriel.com -d www.db.seyramgabriel.com```
+ sudo certbot --nginx -d seyramgabriel.com -d www.seyramgabriel.com -d proxy.seyramgabriel.com -d www.proxy.seyramgabriel.com -d db.seyramgabriel.com -d www.db.seyramgabriel.com
+ ```
 
