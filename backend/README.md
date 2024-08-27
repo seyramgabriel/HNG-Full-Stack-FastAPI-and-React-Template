@@ -98,7 +98,7 @@ CMD poetry run bash ./prestart.sh;poetry run uvicorn app.main:app --host 0.0.0.0
 
 2. **Setting up ports and proxy**:
     - Ensure that you are in the root directory that contains both frontend and backend.
-    - Install inginx
+    - Install inginx. You can skip this step if you already run the install.sh script.
     - Edit the sites-available file in the root directory of this repository to reflect your domain name and IP address
     - Make sure to use a registered domain name and to have records for all sub-domains
     - Copy the content of sites-available file to /etc/nginx/sites-available/your-prefered-name eg. ingkwasiattafua
@@ -234,9 +234,9 @@ volumes:
 
     ```docker images``` # Show images
 
-    ```docker ps -a```  # Containers created
+    ```docker ps -a```  # Show Containers created
 
-    ```docker ps```     # Containers running
+    ```docker ps```     # Show Containers running
 
 5. **Accessing the application**
 
