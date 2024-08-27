@@ -13,5 +13,5 @@ RUN npm install
 # Expose the port as in vite.config.ts file
 EXPOSE 5173
 
-# Start the Vite server
-CMD ["npm", "run", "dev"]
+# Start the Vite server if you don't start it via the docker-compose file
+#CMD ["npm", "run", "dev"]
