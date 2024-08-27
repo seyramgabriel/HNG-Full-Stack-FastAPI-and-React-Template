@@ -28,7 +28,7 @@ This directory contains the frontend of the application built with ReactJS and C
 
    Ensure the API URL is correctly set in the `.env` file.
    
-   Use ```https://seyramgabriel.com``` if you have your dns properly registered and configured.
+   Use ```https://ingkwasiattafua.com``` if you have your dns properly registered and configured.
 
    Use ```http://localhost:5173``` if you are running on a localhost
 
@@ -57,8 +57,8 @@ RUN npm install
 # Expose the port as in vite.config.ts file
 EXPOSE 5173
 
-# Start the Vite server
-# CMD ["npm", "run", "dev"]
+# Start the Vite server (comment this out if you run the same command in the docker-compose file)
+CMD ["npm", "run", "dev"]
 ```
 
 2. **Frontend .env**

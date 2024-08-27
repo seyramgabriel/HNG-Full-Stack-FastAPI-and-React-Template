@@ -101,12 +101,12 @@ CMD poetry run bash ./prestart.sh;poetry run uvicorn app.main:app --host 0.0.0.0
     - Install inginx. You can skip this step if you already run the install.sh script.
     - Edit the sites-available file in the root directory of this repository to reflect your domain name and IP address
     - Make sure to use a registered domain name and to have records for all sub-domains
-    - Copy the content of sites-available file to /etc/nginx/sites-available/your-prefered-name eg. seyramgabriel
+    - Copy the content of sites-available file to /etc/nginx/sites-available/your-prefered-name eg. ingkwasiattafua
 
 
     - Run
       ```
-      sudo ln -s /etc/nginx/sites-available/seyramgabriel /etc/nginx/sites-enabled/
+      sudo ln -s /etc/nginx/sites-available/ingkwasiattafua /etc/nginx/sites-enabled/
       ```
 
     - Run
@@ -147,7 +147,7 @@ services:
       - POSTGRES_DB=app
       - POSTGRES_USER=app
       - POSTGRES_PASSWORD=changethis123
-      - BACKEND_CORS_ORIGINS=https://seyramgabriel.com,http://localhost,http://localhost:5173,https://localhost,https://localhost:5173
+      - BACKEND_CORS_ORIGINS=https://ingkwasiattafua.com,http://localhost,http://localhost:5173,https://localhost,https://localhost:5173
       - SECRET_KEY=changethis123
       - FIRST_SUPERUSER=devops@hng.tech
       - FIRST_SUPERUSER_PASSWORD=devops#HNG11
@@ -242,17 +242,17 @@ volumes:
 
  You can now access the application on your domain names as below:
  
- ```seyramgabriel.com```    # Replace with your domain name
+ ```ingkwasiattafua.com```    # Replace with your domain name
 
- ```www.seyramgabriel.com``` # Replace with your domain name
+ ```www.ingkwasiattafua.com```
 
- ```db.seyramgabriel.com```   # Replace with your domain name
+ ```db.ingkwasiattafua.com```
 
- ```www.seyramgabriel.com```   # Replace with your domain name
+ ```www.ingkwasiattafua.com```
 
- ```proxy.seyramgabriel.com```  # Replace with your domain name
+ ```proxy.ingkwasiattafua.com```
 
- ```www.proxy.seyramgabriel.com```  # Replace with your domain name
+ ```www.proxy.ingkwasiattafua.com```
 
 
 6. **SSL Certificates**
@@ -265,6 +265,5 @@ volumes:
 
  To obtain certificates for your domain names and get your nginx configured automatically, run the following. Replace domain names with your registered domain names.
  ```
- sudo certbot --nginx -d seyramgabriel.com -d www.seyramgabriel.com -d proxy.seyramgabriel.com -d www.proxy.seyramgabriel.com -d db.seyramgabriel.com -d www.db.seyramgabriel.com
- ```
+ sudo certbot --nginx -d ingkwasiattafua.com -d www.ingkwasiattafua.com -d proxy.ingkwasiattafua.com -d www.proxy.ingkwasiattafua.com -d db.ingkwasiattafua.com -d www.db.ingkwasiattafua.com```
 
