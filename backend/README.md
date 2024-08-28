@@ -102,8 +102,11 @@ CMD poetry run bash ./prestart.sh;poetry run uvicorn app.main:app --host 0.0.0.0
     - Edit the sites-available file in the root directory of this repository to reflect your domain name and IP address
     - Make sure to use a registered domain name and to have records for all sub-domains
     - Copy the content of sites-available file to /etc/nginx/sites-available/your-prefered-name eg. ingkwasiattafua
-
-
+    - Run
+      ```
+      sudo cp sites-available /etc/nginx/sites-available/ingkwasiattafua
+      ```
+    - Create a symbolic link to sites-enabled directory
     - Run
       ```
       sudo ln -s /etc/nginx/sites-available/ingkwasiattafua /etc/nginx/sites-enabled/
@@ -265,5 +268,6 @@ volumes:
 
  To obtain certificates for your domain names and get your nginx configured automatically, run the following. Replace domain names with your registered domain names.
  ```
- sudo certbot --nginx -d ingkwasiattafua.com -d www.ingkwasiattafua.com -d proxy.ingkwasiattafua.com -d www.proxy.ingkwasiattafua.com -d db.ingkwasiattafua.com -d www.db.ingkwasiattafua.com```
+ sudo certbot --nginx -d ingkwasiattafua.com -d www.ingkwasiattafua.com -d proxy.ingkwasiattafua.com -d www.proxy.ingkwasiattafua.com -d db.ingkwasiattafua.com -d www.db.ingkwasiattafua.com
+ ```
 
