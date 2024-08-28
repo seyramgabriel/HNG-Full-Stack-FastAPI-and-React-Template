@@ -10,7 +10,7 @@ COPY . .
 # Install dependencies
 RUN npm install
 
-RUN npm install -g vite@^5.0.1.3
+RUN npm install -g vite@^5.0.13
 
 # Expose the port as in vite.config.ts file
 EXPOSE 5173
