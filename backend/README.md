@@ -230,7 +230,7 @@ volumes:
 3. **Building and running docker images**
     - Run the following command to build the docker image:
      ```
-     docker-compose up -d
+     sudo docker-compose up -d
      ```
 
 4. **Run the following commands to check the images built and the containers created/running**
