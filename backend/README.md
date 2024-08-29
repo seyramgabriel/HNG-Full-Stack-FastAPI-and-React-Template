@@ -102,7 +102,9 @@ CMD poetry run bash ./prestart.sh;poetry run uvicorn app.main:app --host 0.0.0.0
     - Edit the sites-available file in the root directory of this repository to reflect your domain name and IP address
     - Make sure to use a registered domain name and to have records for all sub-domains
     - Copy the content of sites-available file to /etc/nginx/sites-available/your-prefered-name eg. seyramgabriel
-
+      ```
+      cp sites-available /etc/nginx/sites-available/seyramgabriel
+      ```
 
     - Run
       ```
